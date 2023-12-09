@@ -1,0 +1,21 @@
+# THIS FILE ISN'T NEEDED ALL CONNECTIONS WILL BE INSIDE CLUSTER NETWORK
+# ---------------------------------------------------------------------
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: janpeter-dhalle-mongo-ingress
+  namespace: default
+  labels:
+    app: janpeter_dhalle_mongo
+spec:
+  rules:
+    - host: janpeter-dhalle-mongo.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: janpeter-dhalle-mongo-service
+                port:
+                  number: 27017

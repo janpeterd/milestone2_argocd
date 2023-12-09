@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: janpeter-dhalle-mongo-deployment
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: janpeter_dhalle_mongo
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: janpeter_dhalle_mongo
+    spec:
+      volumes:
+        - name: mongo-volume
+          persistentVolumeClaim:
+            claimName: mongo-pvc
+        - name: mongo-init-volume
+          persistentVolumeClaim:
+            claimName: mongo-init-pvc
+      containers:
+        - name: mongo
+          image: mongo
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: "root"
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              value: "secret"
+            - name: MONGO_INITDB_DATABASE
+              value: "milestone2"
+          ports:
+            - containerPort: 27017
+              name: mongo
+          volumeMounts:
+            - mountPath: /data/db
+              name: mongo-volume
+            - mountPath: /docker-entrypoint-initdb.d
+              name: mongo-init-volume

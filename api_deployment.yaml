@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: janpeter-dhalle-api-deployment
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: janpeter_dhalle_api
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: janpeter_dhalle_api
+    spec:
+      volumes:
+        - name: api-volume
+          persistentVolumeClaim:
+            claimName: api-pvc
+      containers:
+        - name: nodejs-api
+          image: janpeterd/nodejs-api
+          ports:
+            - containerPort: 3000
+              name: api # from now on we can use the name http to refer to this port
+          volumeMounts:
+            - mountPath: /home/node/app
+              name: api-volume

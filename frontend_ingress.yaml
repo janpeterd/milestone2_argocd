@@ -1,0 +1,23 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: janpeter-dhalle-lighttpd-ingress
+  namespace: default
+spec:
+  rules:
+    - host: janpeter-dhalle-lighttpd.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: janpeter-dhalle-lighttpd-service
+                port:
+                  name: http
+
+
+
+
+
