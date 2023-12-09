@@ -5,7 +5,7 @@ metadata:
   labels:
     type: local
 spec:
-  storageClassName: mongo_init
+  storageClassName: mongo-init
   capacity:
     storage: 10Gi
   accessModes:
