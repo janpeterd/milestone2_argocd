@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: ubuntu-lighttpd
-          image: janpeterd/ubuntu-lighttpd
+          image: janpeterd/ubuntu-lighttpd:latest
           ports:
             - containerPort: 80
               name: http # from now on we can use the name http to refer to this port
