@@ -19,7 +19,7 @@ spec:
             claimName: api-pvc
       containers:
         - name: nodejs-api
-          image: janpeterd/nodejs-api
+          image: janpeterd/nodejs-api:latest
           ports:
             - containerPort: 3000
               name: api # from now on we can use the name http to refer to this port
